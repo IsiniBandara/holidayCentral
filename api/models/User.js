@@ -2,7 +2,16 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    username: {
+    slct_permission: {
+      type: String,
+      required: true,
+    },
+    fname: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    lname: {
       type: String,
       required: true,
       unique: true,
@@ -16,12 +25,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
   },
-  { timestamps: true }
+  {
+    collection: "UserInfo",
+  }
 );
 
 export default mongoose.model("User", UserSchema);

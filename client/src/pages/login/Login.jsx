@@ -12,32 +12,31 @@ const Login = () => {
 
   const { loading, error, dispatch } = useContext(AuthContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleChange = (e) =>{
-    setCredintials((prev) =>({ ...prev, [e.target.id] : e.target.value }))
-  }
+  const handleChange = (e) => {
+    setCredintials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
 
-  const handleClick = async e =>{
-    e.preventDefault()
-    dispatch({type: "LOGIN_START"})
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
     try {
-        const res =await axios.post("auth/login", credintials)
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data})
-        navigate("/") 
+      const res = await axios.post("auth/login", credintials);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      navigate("/");
     } catch (err) {
-        dispatch({ type: "LOGIN_FAILURE", payload: err.response.data })
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
-  }
-  
+  };
 
   return (
     <div className="login">
       <div className="lContainer">
         <input
-          type="text"
-          placeholder="username"
-          id="username"
+          type="email"
+          placeholder="email"
+          id="email"
           onChange={handleChange}
           className="lInput"
         />
@@ -48,7 +47,9 @@ const Login = () => {
           onChange={handleChange}
           className="lInput"
         />
-        <button disabled={loading} onClick={handleClick} className="lButton">Login</button>
+        <button disabled={loading} onClick={handleClick} className="lButton">
+          Login
+        </button>
         {error && <span>{error.message}</span>}
       </div>
     </div>

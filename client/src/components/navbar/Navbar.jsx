@@ -12,11 +12,17 @@ const Navbar = () => {
           <span className="logo">HolidayCentral</span>
         </Link>
         {user ? (
-          user.username
+          <div className="navItems">
+            <p style={{ color: "#fff" }}>{user.slct_permission}</p>
+            <p style={{ color: "#fff" }}>
+              {user.fname} {user.lname}
+            </p>
+          </div>
         ) : (
           <div className="navItems">
-            <button className="navButton">Register</button>
-            <button className="navButton">Login</button>
+            <Link to={"/login"}>
+              <button className="navButton">Login</button>
+            </Link>
           </div>
         )}
       </div>
